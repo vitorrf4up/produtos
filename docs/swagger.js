@@ -1,4 +1,5 @@
-const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerJsdoc = require("swagger-jsdoc"),
+      swaggerUi = require("swagger-ui-express");
 
 class Swagger {
     options = {
@@ -6,20 +7,22 @@ class Swagger {
         openapi: "3.1.0",
         info: {
           title: "Microserviços - Produtos",
-          version: "0.1.0",
+          version: "1.0.0",
           description:
             "Aplicação CRUD que gerencia produtos"
         },
         servers: [
           {
-            url: "http://localhost:3000",
+            url: "http://localhost:3000"
           },
         ],
       },
-      apis: ["./routers/*.js"],
+      apis: ["./docs/swagger.yaml"],
     };
     
     specs = swaggerJsdoc(this.options);
+    serve = swaggerUi.serve;
+    setup = swaggerUi.setup(this.specs);
 }
 
 module.exports = new Swagger();
