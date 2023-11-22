@@ -1,44 +1,25 @@
-var express = require('express');
-var path = require('path');
+// imports
+const express = require('express');
+const app = express();
+const path = require('path');
+const produtosRouter = require("./routers/produtosRouter");
 
-const produtoController = require("./controllers/produtoController");
-
-// express configuration
-var app = express();
-
+// configuracao do express
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // start 
-app.listen(3000, () => console.log("Listening on port 3000"));
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
 
 // rotas
-app.get("/", () => res.send("API is working"));
-
-app.get('/produtos', async (req, res) => {
-  produtoController.getProdutos(req, res)
-});
-
-app.get('/produtos/:id', async (req, res) => {
-  produtoController.getProdutoById(req, res)
-});
-
-app.post('/produtos', async (req, res) => {
-  produtoController.createProduto(req, res)
-});
-
-app.put('/produtos/:id', async (req, res) => {
-  produtoController.alterarProduto(req, res)
-});
-
-app.delete('/produtos/:id', async (req, res) => {
-  produtoController.deletarProduto(req, res)
-});
+app.get("/", (req, res) => res.json({message: "API está funcionando"}));
+app.use(produtosRouter);
 
 // 404
 app.all("*", (req, res) => {
-  res.send({"error": `Cannot ${req.method} ${req.url}`})
+  res.status(404).json({"error": `${req.method} ${req.url} não é um endpoint válido`})
 });
 
 module.exports = app;
