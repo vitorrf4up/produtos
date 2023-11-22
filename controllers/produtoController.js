@@ -2,10 +2,10 @@ const produtoService = require('../services/produtoService');
 
 class ProdutoController {
   async createProduto(req, res) {
-    const { name, category, listPrice } = req.body;
-
     try {
-      const novoProduto = await produtoService.createProduto(name, category, listPrice);
+      const { nome, categoria, precoSugerido } = req.body;
+
+      const novoProduto = await produtoService.createProduto(nome, categoria, precoSugerido);
 
       res.status(201).json(novoProduto);
     } catch (error) {
@@ -27,13 +27,13 @@ class ProdutoController {
   }
 
   async getProdutoById(req, res) {
-    const { id } = req.params;
-
     try {
+      const { id } = req.params;
       const produto = await produtoService.getProdutoById(id);
 
-      if (!produto) 
+      if (!produto) {
         return res.status(404).json({error: "Produto não encontrado"});
+      }
 
       res.status(200).json(produto);
     } catch (error) {
@@ -42,13 +42,13 @@ class ProdutoController {
     }
   }
 
-  async alterarProduto(req, res) {
+  async updateProduto(req, res) {
     try {
       const { id } = req.params;
   
       const produto = req.body;
   
-      produtoService.alterarProduto(id, produto);
+      produtoService.updateProduto(id, produto);
 
       return res.status(204).send();
     } catch(error) {
@@ -57,12 +57,12 @@ class ProdutoController {
     }
   }
 
-  async deletarProduto(req, res) {
+  async deleteProduto(req, res) {
     try {
       const { id } = req.params;
     
-      const deletado = await produtoService.deletarProduto(id);
-      if (deletado <= 0) {
+      const produtosDeletados = await produtoService.deleteProduto(id);
+      if (produtosDeletados <= 0) {
         return res.status(404).json({error: "Produto não encontrado"});        
       }
 

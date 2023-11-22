@@ -7,15 +7,15 @@ const Product = sequelize.define('Product', {
     autoIncrement: true,
     primaryKey: true
   },
-  name: {
+  nome: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  category: {
+  categoria: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  listPrice: {
+  precoSugerido: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },

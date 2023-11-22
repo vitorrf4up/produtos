@@ -1,10 +1,6 @@
 const Produto = require('../models/produto');
 
 class UserService {
-  async createProduto(name, category, listPrice) {
-    return Produto.create({ name, category, listPrice });
-  }
-
   async getProdutos() {
     return Produto.findAll();
   }
@@ -13,18 +9,20 @@ class UserService {
     return Produto.findOne({ where: { id: id } });
   }
 
-  async alterarProduto(id, produto) {
+  async createProduto(nome, categoria, precoSugerido) {
+    return Produto.create({ nome, categoria, precoSugerido });
+  }
+
+  async updateProduto(id, produto) {
     return Produto.update(
-      { name: produto.name, category: produto.category, listPrice: produto.listPrice},
+      produto,
       { where: { id: id}}
     );
   }
  
-  async deletarProduto(id) {
+  async deleteProduto(id) {
     return Produto.destroy({
-      where: {
-        id: id
-      }
+      where: { id: id }
     });
   }
 }
