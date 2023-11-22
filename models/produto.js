@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Product = sequelize.define('Product', {
+const Produto = sequelize.define('Produto', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -18,9 +18,9 @@ const Product = sequelize.define('Product', {
   precoSugerido: {
     type: DataTypes.FLOAT,
     allowNull: false,
-  },
-});
+  }}, 
+  { timestamps: false });
 
-Product.sync(); // Sincroniza o modelo com o banco de dados
+Produto.sync(); // Sincroniza o modelo com o banco de dados
 
-module.exports = Product;
+module.exports = Produto;
