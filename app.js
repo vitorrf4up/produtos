@@ -18,10 +18,13 @@ app.use(
 );
 // start 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Ouvindo na porta ${PORT}`);
+  console.log(`Documentação na URL http://localhost:3000/docs`)
+});
 
 // rotas
-app.get("/", (req, res) => res.json({message: "API está funcionando"}));
+app.get("/", (req, res) => res.redirect("http://localhost:3000/docs"));
 app.use(produtosRouter);
 
 // 404

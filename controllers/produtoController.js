@@ -48,7 +48,7 @@ class ProdutoController {
   
       const produto = req.body;
   
-      produtoService.updateProduto(id, produto);
+      await produtoService.updateProduto(id, produto);
 
       return res.status(204).send();
     } catch(error) {
