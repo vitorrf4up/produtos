@@ -13,12 +13,22 @@ class UserService {
     return Produto.create({ nome, categoria, precoSugerido });
   }
 
-  async updateProduto(id, produto) {
-    return Produto.update(
-      produto, { where: { id: id}}
+  async updateProduto(produto) {
+    const produtoDb = await this.getProdutoById(produto.id);
+
+    if (!produtoDb) {
+      return false;
+    }
+
+    await Produto.update(
+        produto,
+        { where: { id: produto.id } }
     );
+
+    return true;
   }
- 
+
+
   async deleteProduto(id) {
     return Produto.destroy({
       where: { id: id }

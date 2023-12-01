@@ -67,6 +67,33 @@ paths:
             application/json:
               schema:
                   $ref: '#/components/schemas/Error'
+    put:
+      summary: Atualiza um produto pelo ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        204:
+          description: O produto foi atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        404:
+          description: O produto não foi encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Erro no servidor ao tentar atualizar o produto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /produtos/{id}:
     get:
       summary: Obtém um produto pelo ID
@@ -94,40 +121,6 @@ paths:
                   $ref: '#/components/schemas/Error'
         500:
           description: Erro no servidor ao tentar buscar o produto
-          content:
-            application/json:
-              schema:
-                  $ref: '#/components/schemas/Error'
-    put:
-      summary: Atualiza um produto pelo ID
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-                  $ref: '#/components/schemas/Produto'
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-          description: O ID do produto
-      responses:
-        204:
-          description: O produto foi atualizado com sucesso
-          content:
-            application/json:
-              schema:
-                  $ref: '#/components/schemas/Produto'
-        404:
-          description: O produto não foi encontrado
-          content:
-            application/json:
-              schema:
-                  $ref: '#/components/schemas/Error'
-        500:
-          description: Erro no servidor ao tentar atualizar o produto
           content:
             application/json:
               schema:

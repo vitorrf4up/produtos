@@ -14,7 +14,7 @@ router.post('/produtos', async (req, res) => {
   await produtoController.createProduto(req, res)
 });
 
-router.put('/produtos/:id', async (req, res) => {
+router.put('/produtos', async (req, res) => {
   await produtoController.updateProduto(req, res)
 });
 

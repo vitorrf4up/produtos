@@ -44,11 +44,13 @@ class ProdutoController {
 
   async updateProduto(req, res) {
     try {
-      const { id } = req.params;
-  
       const produto = req.body;
   
-      await produtoService.updateProduto(id, produto);
+      const produtoFoiAtualizado = await produtoService.updateProduto( produto);
+
+      if (!produtoFoiAtualizado) {
+        return res.status(404).json({error: "Produto não encontrado"});
+      }
 
       return res.status(204).send();
     } catch(error) {
