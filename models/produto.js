@@ -18,7 +18,16 @@ const Produto = sequelize.define('Produto', {
   precoSugerido: {
     type: DataTypes.FLOAT,
     allowNull: false,
-  }}, 
+  },
+  fornecedorId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    default: 0
+  },
+  fornecedor: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  }},
   { timestamps: false });
 
 Produto.sync(); // Sincroniza o modelo com o banco de dados

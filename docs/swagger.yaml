@@ -19,11 +19,18 @@ components:
         precoSugerido:
           type: number
           description: Preço sugerido para o produto
+        fornecedorId:
+          type: number
+          description: ID do fornecedor ao qual o produto pertence
+        fornecedor:
+          type: string
+          description: Informações do fornecedor em formato de string
       example:
          id: 1
          nome: Café
          categoria: Alimentos
          precoSugerido: 15
+         fornecedorId: 2
     Error:
        type: object
        properties:

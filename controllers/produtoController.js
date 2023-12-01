@@ -31,9 +31,9 @@ class ProdutoController {
 
   async createProduto(req, res) {
     try {
-      const { nome, categoria, precoSugerido } = req.body;
+      const { nome, categoria, precoSugerido, fornecedorId } = req.body;
 
-      const novoProduto = await produtoService.createProduto(nome, categoria, precoSugerido);
+      const novoProduto = await produtoService.createProduto(nome, categoria, precoSugerido, fornecedorId);
 
       res.status(201).json(novoProduto);
     } catch (error) {
