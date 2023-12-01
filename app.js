@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const produtosRouter = require("./routers/produtosRouter");
 const swagger = require("./docs/swagger");
+require("dotenv").config();
 
 // configuracao do express
 app.use(express.json());
@@ -16,15 +17,17 @@ app.use(
   swagger.serve,
   swagger.setup
 );
+
 // start 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Ouvindo na porta ${PORT}`);
-  console.log(`Documentação na URL http://localhost:3000/docs`)
+  console.log(`Documentação na URL http://localhost:${PORT}/docs`)
 });
 
 // rotas
-app.get("/", (req, res) => res.redirect("http://localhost:3000/docs"));
+app.get("/", (req, res) => res.redirect("/docs"));
 app.use(produtosRouter);
 
 // 404

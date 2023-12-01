@@ -15,8 +15,7 @@ class UserService {
 
   async updateProduto(id, produto) {
     return Produto.update(
-      produto,
-      { where: { id: id}}
+      produto, { where: { id: id}}
     );
   }
  

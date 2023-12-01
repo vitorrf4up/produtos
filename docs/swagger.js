@@ -1,5 +1,7 @@
-const swaggerJsdoc = require("swagger-jsdoc"),
-      swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+require("dotenv").config();
+const PORT = process.env.PORT
 
 class Swagger {
     options = {
@@ -13,7 +15,7 @@ class Swagger {
         },
         servers: [
           {
-            url: "http://localhost:3000"
+            url: `http://localhost:${PORT}`
           },
         ],
       },
